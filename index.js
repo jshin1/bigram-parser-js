@@ -6,32 +6,38 @@ const outStream = new stream();
 const rl = readline.createInterface(inStream, outStream);
 
 let words = []
+let bigrams = {}
 
 rl.on('line', (line) => {
 
-  let word = [0, 0]
+  let initialWords = []
+  let currWord = [0, 0]
+
+  const populateWords = (line) => {
+
+    while (initialWords.length < 2) {
+
+    }
+    return initialWords
+  }
 
   if (words.length < 2) {
+    words = populateWords(line)
+    const currBigram = words.join(' ').toLowerCase()
+    bigrams[currBigram] = bigrams[currBigram] + 1 || 1
 
-    while (words.length < 2) {
-      while ((line[word[0]].charCodeAt() < 65 || line[word[0]].charCodeAt() > 122) && word[0] < line.length) {
-        word[0]++
-        word[1]++
-      }
-
-      if (line[word[0]].charCodeAt() >= 65 && line[word[0]].charCodeAt() <= 122 && word[0] < line.length) {
-        while ((line[word[1]].charCodeAt() >= 65 && line[word[1]].charCodeAt() <= 122) && word[1] < line.length) {
-          word[1]++
-        }
-
-        words.push(line.slice(word[0], word[1]))
-        word = [word[1], word[1]]
-      }
+    if (word[0] < line.length) {
+      // once initial words are populated, program must be run for the remaining texts in the current line
     }
-    console.log(words);
+
+  } else {
+
+    console.log('hi');
+
   }
 })
 
 rl.on('close', () => {
   console.log('Process has been completed.');
+  console.log(bigrams);
 })
