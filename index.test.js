@@ -1,17 +1,18 @@
-const fs = require('fs');
-const readline = require('readline');
-const stream = require('stream');
-const inStream = fs.createReadStream('sample.txt');
-const outStream = new stream();
-const rl = readline.createInterface(inStream, outStream);
+// const fs = require('fs');
+// const readline = require('readline');
+// const stream = require('stream');
+// const inStream = fs.createReadStream('sample.txt');
+// const outStream = new stream();
+// const rl = readline.createInterface(inStream, outStream);
 
 const bigramParse = require('./index');
 
-describe('bigramParse function', () => {
-  it('test1', () => {
+global.console.log = jest.fn()
 
-    return bigramParse().then(data => {
-      expect(data).toEqual({})
-    })
+describe('bigramParse function', () => {
+  it('test1', (done) => {
+    console.log(global.console.log)
+    expect(global.console.log).toHaveBeenCalledWith('hi')
+    done()
   })
 })
