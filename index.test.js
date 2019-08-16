@@ -1,18 +1,27 @@
-// const fs = require('fs');
-// const readline = require('readline');
-// const stream = require('stream');
-// const inStream = fs.createReadStream('sample.txt');
-// const outStream = new stream();
-// const rl = readline.createInterface(inStream, outStream);
+const parser = require('./index');
+const sampleText = "hi1 this is5 @a test5!"
+const mockWords = ["hi", "this", "is", "a", "test"]
+const mockBigrams = {
+  "hi this": 1,
+  "this is": 1,
+  "is a": 1,
+  "a test": 1
+}
 
-const bigramParse = require('./index');
+describe('sanitizeText', () => {
+  it('Removes everything besides letters', () => {
+    expect(parser.sanitizeText(sampleText)).toEqual(mockWords)
+  })
+})
 
-global.console.log = jest.fn()
+describe('createHistogram', () => {
+  it('Creates accurate histogram of text bigrams', () => {
+    expect(parser.createHistogram(mockWords)).toEqual(mockBigrams)
+  })
+})
 
-describe('bigramParse function', () => {
-  it('test1', (done) => {
-    console.log(global.console.log)
-    expect(global.console.log).toHaveBeenCalledWith('hi')
-    done()
+describe('logData', () => {
+  it('Works with null', () => {
+    expect(parser.logData(null)).toBe(null)
   })
 })

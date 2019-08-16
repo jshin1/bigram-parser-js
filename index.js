@@ -40,7 +40,7 @@ function sanitizeText(line) {
   return words
 }
 
-function bigramHistogram(words) {
+function createHistogram(words) {
   let bigrams = {}
 
   for (let i = 1; i < words.length; i++) {
@@ -64,7 +64,7 @@ function runner() {
 
   rl.on('line', line => {
     const words = sanitizeText(line)
-    bigrams = bigramHistogram(words)
+    bigrams = createHistogram(words)
   })
 
   rl.on('close', () => {
@@ -78,11 +78,11 @@ function runner() {
 }
 
 // console.log(runner());
-runner()
+// runner()
 
 module.exports = {
   sanitizeText,
-  bigramHistogram,
+  createHistogram,
   logData
 }
 
